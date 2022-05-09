@@ -1,0 +1,18 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+body{
+    background-color: rgb(240, 250, 251);
+    overflow-y: overlay;
+}
+.App-lists{
+    display: grid;
+    justify-content: center;
+}
+.img-header{
+    /* background-image: url("file:///C:/Users/Muha/Desktop/folders/dev/react/challenge/front-challenge/images/bg-header-desktop.svg"); */
+    width: 100%;
+}
