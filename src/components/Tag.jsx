@@ -4,7 +4,7 @@ import store from '../redux/store';
 
 const Tag = function(props){
     
-    const tag = props.tag;
+    const {tag} = props;
     
     function removeTag(id){
         store.dispatch(tagRemoved(id));

@@ -3,7 +3,7 @@ import store from '../redux/store';
 import {tagAdded,filterVacs} from '../redux/actions';
 
 const Vacancy = function(props){
-  const vacancy = props.vacancy;
+  const {vacancy} = props;
   
   function addTag(tag){
     store.dispatch(tagAdded(tag));
@@ -12,19 +12,17 @@ const Vacancy = function(props){
   
 
     return (
-        <main className={`vacancy ${vacancy.featured ? "featured" : "" }`}>
+        <main className={`vacancy ${vacancy.featured && "featured"}`}>
             <article className="vacancy-info">
               <img className="vacancy-info__logo" src={vacancy.logo} alt="logo" />
               <section className="vacancy-description">
                 <div className="vacancy-description__info">
                   <span className="vacancy-description__company">{vacancy.company}</span>
-                  { vacancy.new  
-                    ? <span className="vacancy-description__new">NEW!</span>
-                    : ""
+                  { vacancy.new && 
+                    <span className="vacancy-description__new">NEW!</span>
                   }
-                  { vacancy.featured 
-                    ? <span className="vacancy-description__featured">FEATURED</span>
-                    : ""
+                  { vacancy.featured &&
+                    <span className="vacancy-description__featured">FEATURED</span>
                   }
                   
                 </div>

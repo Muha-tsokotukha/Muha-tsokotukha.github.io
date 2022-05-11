@@ -1,7 +1,7 @@
 import React from "react";
 import Vacancy from "./Vacancy";
 const VacancyList = function(props){
-    const vacancies = props.vacancies;
+    const {vacancies} = props;
     return (
         <main >
             <article className="VacancyList">
