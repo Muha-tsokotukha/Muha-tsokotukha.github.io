@@ -8,7 +8,6 @@ export function tagAdded(tag){
         }
     }
 }
-
 export function tagRemoved(id){
     return {
         type: actions.TAG_REMOVED,
@@ -17,7 +16,6 @@ export function tagRemoved(id){
         }
     }
 }
-
 export function filterVacs(tags){
   return {
       type: actions.FILTER,
@@ -26,7 +24,6 @@ export function filterVacs(tags){
       }
   }
 }
-
 export function clearFilter(){
   return {
       type: actions.FILTER_CLEAR,

@@ -1,5 +1,7 @@
 import React from "react";
 import Vacancy from "./Vacancy";
+import { connect } from 'react-redux';
+
 const VacancyList = function(props){
     const {vacancies} = props;
     return (
@@ -13,4 +15,10 @@ const VacancyList = function(props){
     )
 };
 
-export default VacancyList;
+const mapStateToProps = (state) =>{
+    return {
+        vacancies: state.vacancies
+    }
+}
+
+export default connect(mapStateToProps)(VacancyList);

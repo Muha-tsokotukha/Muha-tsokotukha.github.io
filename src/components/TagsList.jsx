@@ -1,15 +1,12 @@
 import React  from "react";
-import { clearFilter, clearTags } from "../redux/actions";
-import store from '../redux/store';
+import { clearTags } from "../redux/actions";
 import Tag from "./Tag";
+import { connect } from "react-redux";
+
 const TagsList = function(props){
-    
     const {tags} = props;
-    
-    function filterClear(){
-        store.dispatch(clearTags());
-        store.dispatch(clearFilter());
-    }
+    const {filterClear} = props;
+
     return (
         <div>
             {tags.length > 0 &&
@@ -26,4 +23,16 @@ const TagsList = function(props){
     )
 };
 
-export default TagsList;
+const mapStateToProps = (state) =>{
+    return {
+        tags: state.tags
+    }
+}
+
+const mapDispatchToProps = (dispatch) =>{
+    return {
+        filterClear: ()=>dispatch(clearTags())
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(TagsList);

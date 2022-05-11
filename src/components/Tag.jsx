@@ -1,15 +1,14 @@
 import React  from "react";
 import {  filterVacs, tagRemoved } from "../redux/actions";
-import store from '../redux/store';
+import store from "../redux/store";
 
 const Tag = function(props){
-    
     const {tag} = props;
-    
-    function removeTag(id){
+    const  removeTag = function (id){
         store.dispatch(tagRemoved(id));
         store.dispatch(filterVacs(store.getState().tags));
-    }
+      }
+
     return (
         <div className="TagList-container__item" key={tag.id}>
             <span className="TagList-container__name">
