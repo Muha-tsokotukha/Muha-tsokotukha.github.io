@@ -3,10 +3,11 @@ import { clearTags } from "../redux/actions";
 import Tag from "./Tag";
 import { connect } from "react-redux";
 
+
 const TagsList = function(props){
     const {tags} = props;
     const {filterClear} = props;
-
+    
     return (
         <div>
             {tags.length > 0 &&

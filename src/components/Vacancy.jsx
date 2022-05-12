@@ -1,16 +1,11 @@
 import React from "react";
-import store from '../redux/store';
 import {tagAdded,filterVacs} from '../redux/actions';
+import { connect } from "react-redux";
 
 const Vacancy = function(props){
   const {vacancy} = props;
+  const {addAndFilter} = props;
   
-  function addTag(tag){
-    store.dispatch(tagAdded(tag));
-    store.dispatch(filterVacs(store.getState().tags));
-  }
-  
-
     return (
         <main className={`vacancy ${vacancy.featured && "featured"}`}>
             <article className="vacancy-info">
@@ -37,16 +32,43 @@ const Vacancy = function(props){
               </section>
             </article>
             <div className="vacancy-description__tags">
-              <span onClick={()=>addTag(vacancy.role)} className="vacancy-description__tag" >{vacancy.role}</span>
-              <span onClick={()=>addTag(vacancy.level)} className="vacancy-description__tag" >{vacancy.level}</span>
+              <span onClick={()=>addAndFilter(vacancy.role)} className="vacancy-description__tag" >{vacancy.role}</span>
+              <span onClick={()=>addAndFilter(vacancy.level)} className="vacancy-description__tag" >{vacancy.level}</span>
               { vacancy.languages.map((language)=> 
-                <span onClick={()=>addTag(language)} className="vacancy-description__tag" key={language}>{language}</span>
+                <span onClick={()=>addAndFilter(language)} className="vacancy-description__tag" key={language}>{language}</span>
               )}
               { vacancy.tools.map((tool)=> 
-                <span onClick={()=>addTag(tool)} className="vacancy-description__tag" key={tool}>{tool}</span>
+                <span onClick={()=>addAndFilter(tool)} className="vacancy-description__tag" key={tool}>{tool}</span>
               )}
             </div>
       </main>
     )
 }
-export default Vacancy;
+
+
+const mapStateToProps = (state, ownProps) => ({
+  vacancy: ownProps.vacancy,
+  tags: state.tags
+})
+
+const mapDispatchToProps = dispatch => ({
+  addTag: (tag, tags) => {
+    dispatch(tagAdded(tag));
+    dispatch(filterVacs(tags));
+  },
+})
+
+const mergeProps = (ownProps, mapProps) => {
+  let { tags } = ownProps; 
+  const { vacancy } = ownProps;
+  const { addTag } = mapProps;
+  return {
+      addAndFilter: (tag) => {
+        tags = [...tags, {name: tag}]
+        addTag(tag, tags);
+      },
+      vacancy
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Vacancy)

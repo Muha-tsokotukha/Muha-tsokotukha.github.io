@@ -10,14 +10,13 @@ function tagsReducer(state=[], action){
         if( state.length > 0 ){
             doesntInclude = !state.map(item => item.name).includes(action.payload.name);
         }
+        let tags = [...state];
+        tags.push({
+            id: lastId++,
+            name: action.payload.name
+        });
         if( doesntInclude )
-        return [
-            ...state,
-            {
-                id: lastId++,
-                name: action.payload.name
-            }
-        ] ;
+        return tags;
     }
     else if( action.type === actions.TAG_REMOVED ){
         return state.filter(tag=> tag.id !== action.payload.id);
